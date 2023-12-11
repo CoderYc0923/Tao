@@ -5,8 +5,7 @@ import 'nprogress/nprogress.css'
 
 // 导入路由组件
 import main from '@/views/index.vue'
-import mock from '@/views/mock/index.vue'
-import charts from '@/views/charts/index.vue'
+import coin from '@/views/coin/index.vue'
 
 NProgress.configure({ showSpinner: true, parent: '#app' })
 
@@ -18,14 +17,9 @@ const routes = [
     component: main,
   },
   {
-    path: '/mock',
-    name: 'mock',
-    component: mock,
-  },
-  {
-    path: '/charts',
-    name: 'charts',
-    component: charts,
+    path: '/coin',
+    name: 'coin',
+    component: coin,
   },
 ]
 
