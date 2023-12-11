@@ -1,68 +1,68 @@
 <script setup lang="ts">
-import type { OutputInfo } from "@/typing";
-import GuaMainControler from "@/utils/hooks/useDivination";
-import { showToast } from "vant";
+import { showToast } from 'vant'
+import type { OutputInfo } from '@/typing'
+import GuaMainControler from '@/utils/hooks/useDivination'
 
-const mainControler = new GuaMainControler();
-const result = ref<OutputInfo>();
-const noResult = ref<boolean>(true);
+const mainControler = new GuaMainControler()
+const result = ref<OutputInfo>()
+const noResult = ref<boolean>(true)
 
 function pull() {
-  const mock = [1, 1, 1];
-  for (let i = 0; i < 6; i++) mainControler.throwYaoHandle(mock);
+  const mock = [1, 1, 1]
+  for (let i = 0; i < 6; i++) mainControler.throwYaoHandle(mock)
 
-  const outputYaoDescript = mainControler.calculateYao();
-  result.value = outputYaoDescript;
-  noResult.value = false;
+  const outputYaoDescript = mainControler.calculateYao()
+  result.value = outputYaoDescript
+  noResult.value = false
 }
 
 function copy() {
-  let text = getCopyText();
-  copyHandle(text);
+  const text = getCopyText()
+  copyHandle(text)
   showToast('复制成功')
 }
 
 function getCopyText() {
-  let copyText = `解卦结果：${result.value.resultText}。变爻：${result.value.changedYaoArray.join('、')}。`
+  const copyText = `解卦结果：${result.value.resultText}。变爻：${result.value.changedYaoArray.join('、')}。`
   return copyText
 }
 
-function copyHandle(val:string) {
-  const inp = document.createElement('input');
-  inp.type = 'text';
-  inp.value = val;
+function copyHandle(val: string) {
+  const inp = document.createElement('input')
+  inp.type = 'text'
+  inp.value = val
   document.body.appendChild(inp)
-  inp.select();
-  document.execCommand("Copy", true);
+  inp.select()
+  document.execCommand('Copy', true)
   document.body.removeChild(inp)
 }
 
 // reset data
 function reset() {
-  noResult.value = true;
+  noResult.value = true
 }
 
 // back
-const onClickLeft = () => history.back();
+const onClickLeft = () => history.back()
 </script>
 
 <template>
   <VanNavBar title="💿 金钱卦" left-arrow fixed @click-left="onClickLeft" />
   <div class="container">
     <div class="result">
-      <div class="data-label" v-if="result">解卦结果</div>
-      <div class="data-content" v-if="result">
+      <div v-if="result" class="data-label">
+        解卦结果
+      </div>
+      <div v-if="result" class="data-content">
         <div>
           <span>{{ result.resultText }}</span>
-          <span
-            >变爻：
+          <span>变爻：
             <span
               v-for="(item, index) in result.changedYaoArray"
               :key="index"
               style="font-weight: bold"
-              >{{ item
-              }}<i v-if="index < result.changedYaoArray.length - 1">、</i></span
-            >
+            >{{ item
+            }}<i v-if="index < result.changedYaoArray.length - 1">、</i></span>
           </span>
           <div class="yao-descript">
             <span>本卦卦辞：{{ result.currentSentenceText }}</span>
@@ -110,9 +110,15 @@ const onClickLeft = () => history.back();
       </div>
     </div>
     <div class="tools-area">
-      <VanButton round block type="primary" @click="pull" v-if="noResult"> 解卦 </VanButton>
-      <VanButton round block type="primary" @click="copy" v-else> 一键复制 </VanButton>
-      <VanButton round block type="default" @click="reset"> 重置 </VanButton>
+      <VanButton v-if="noResult" round block type="primary" @click="pull">
+        解卦
+      </VanButton>
+      <VanButton v-else round block type="primary" @click="copy">
+        一键复制
+      </VanButton>
+      <VanButton round block type="default" @click="reset">
+        重置
+      </VanButton>
     </div>
   </div>
 </template>
