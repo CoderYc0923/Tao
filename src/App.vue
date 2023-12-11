@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { ConfigProviderTheme } from 'vant'
-import { localStorage } from '@/utils/local-storage'
-import { useStore } from '@/stores'
+import { useStore } from '@/stores';
+import { localStorage } from '@/utils/local-storage';
+import type { ConfigProviderTheme } from 'vant';
 
 const store = useStore()
 const theme = ref<ConfigProviderTheme>('light')
@@ -24,7 +24,7 @@ provide('isRealDark', computed(() => theme.value === 'dark'))
 </script>
 
 <template>
-  <VanConfigProvider :theme="theme">
+  <VanConfigProvider :theme="theme" style="height: 100%">
     <RouterView />
   </VanConfigProvider>
 </template>
