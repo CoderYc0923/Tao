@@ -10,7 +10,7 @@ function pull() {
 }
 
 // reset data
-const reset = () => messages.value = ''
+const reset = () => messages.value = []
 
 // back
 const onClickLeft = () => history.back()
