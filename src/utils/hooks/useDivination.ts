@@ -38,6 +38,15 @@ class GuaMainControler {
     const reslut = this.analyzeControler.getResult(this.currentYaoArr)
     return this.randerControler.output(reslut)
   }
+
+  /**
+   * 重置
+   */
+  reset() {
+    this.currentYaoArr = []
+    this.analyzeControler.reset()
+    this.randerControler.reset()
+  }
 }
 
 export default GuaMainControler

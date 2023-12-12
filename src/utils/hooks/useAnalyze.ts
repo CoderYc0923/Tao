@@ -35,6 +35,11 @@ class GuaAnalyzeControler {
     }
   }
 
+  reset() {
+    this.currentGua = null
+    this.futureGua = null
+  }
+
   /**
    * 得到对应的之卦
    */
@@ -65,7 +70,7 @@ class GuaAnalyzeControler {
     const guaName = this.getDoubleGua(yaoArray).doubleName
     const currentYaoArr = []
     for (let i = 0; i < 6; i++) {
-      const yao: SentenceYao = yaoSentenceData.filter(yao => yao.index === i && yao.guaName === guaName[0])[0]
+      const yao: SentenceYao = yaoSentenceData.filter(yao => yao.index === i && yao.guaName === guaName)[0]
       yao.code = yaoArray[i]
       yao.property = propertyHash[yaoArray[i]]
       yao.fill = fillHash[yaoArray[i]]

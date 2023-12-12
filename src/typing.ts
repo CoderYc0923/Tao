@@ -51,4 +51,17 @@ export interface OutputInfo {
   futureSentenceText: string// 之卦卦辞
   futureSentenceArray: YaoSentence[] // 之卦爻辞
   futureChangedSentenceArray: YaoSentence[]// 之卦变爻爻辞
+  currentGua: DoubleGua
+  futureGua: DoubleGua
+}
+
+export interface Coin {
+  number: number
+  comp: any
+}
+
+export enum ShowType {
+  DIVINATION,
+  INTERPRET,
+  RENDER,
 }

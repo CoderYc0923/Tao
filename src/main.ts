@@ -8,6 +8,7 @@ import router from './router'
 import 'virtual:uno.css'
 
 import './app.less'
+import '@/assets/font/font.less'
 
 // Vant 桌面端适配
 import '@vant/touch-emulator'

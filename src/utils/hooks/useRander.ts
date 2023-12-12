@@ -6,6 +6,26 @@ import type { DoubleGua, OutputInfo, RanderResult, YaoSentence } from '@/typing'
 class GuaRanderControler {
   private outputInfo: OutputInfo
   constructor() {
+    this.reset()
+  }
+
+  output(reslut: RanderResult) {
+    // 处理占卜结果
+    this.handleResult(reslut)
+    // 处理变爻
+    this.handleChangedYao(reslut)
+    // 处理卦辞
+    this.handleGuaSentence(reslut)
+    // 处理本卦爻辞
+    this.handleYaoSentence(reslut.currentGua, true)
+    // 处理之卦爻辞
+    this.handleYaoSentence(reslut.futureGua, false)
+    this.outputInfo.currentGua = reslut.currentGua
+    this.outputInfo.futureGua = reslut.futureGua
+    return this.outputInfo
+  }
+
+  reset() {
     this.outputInfo = {
       changedYaoArray: [], // 变爻概述
       resultText: '', // 占卜结果
@@ -15,19 +35,9 @@ class GuaRanderControler {
       futureSentenceText: '', // 之卦卦辞
       futureSentenceArray: [], // 之卦爻辞
       futureChangedSentenceArray: [], // 之卦变爻爻辞
+      currentGua: null,
+      futureGua: null,
     }
-  }
-
-  output(reslut: RanderResult) {
-    // 处理占卜结果
-    this.handleResult(reslut)
-    // 处理变爻
-    this.handleChangedYao(reslut)
-    // 处理本卦爻辞
-    this.handleYaoSentence(reslut.currentGua, true)
-    // 处理之卦爻辞
-    this.handleYaoSentence(reslut.futureGua, false)
-    return this.outputInfo
   }
 
   handleResult(reslut: RanderResult) {
@@ -43,6 +53,12 @@ class GuaRanderControler {
       changedYaoArray = currentChangedYaoArray.map(yao => yao.yaoName)
 
     this.outputInfo.changedYaoArray = changedYaoArray
+  }
+
+  handleGuaSentence(reslut: RanderResult) {
+    const { currentGua, futureGua } = reslut
+    this.outputInfo.currentSentenceText = `《${currentGua.doubleName}》${currentGua.sentence}`
+    this.outputInfo.futureSentenceText = `《${futureGua.doubleName}》${futureGua.sentence}`
   }
 
   handleYaoSentence(gua: DoubleGua, isCurrent: boolean) {

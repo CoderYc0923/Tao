@@ -1,0 +1,4 @@
+@font-face {
+  font-family: "base-font";
+  src: url("迷你繁方篆.ttf");
+}

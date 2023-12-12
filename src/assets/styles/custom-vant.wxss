@@ -1,0 +1,8 @@
+:root:root {
+  --van-overlay-z-index: 100;
+  --van-overlay-background: rgba(0, 0, 0, 0.1);
+  --van-floating-bubble-z-index: 99;
+  --van-floating-bubble-size: 24px;
+  --van-floating-bubble-icon-size: 36px;
+  --van-floating-bubble-background: black;
+}
