@@ -10,7 +10,6 @@ declare module 'vue' {
     Chart: typeof import('./src/components/chart/index.vue')['default']
     CoinYang: typeof import('./src/components/coin/coinYang.vue')['default']
     CoinYin: typeof import('./src/components/coin/coinYin.vue')['default']
-    copy: typeof import('./src/components/coin/coinYang copy.vue')['default']
     VanButton: typeof import('vant/es')['Button']
     VanCell: typeof import('vant/es')['Cell']
     VanCellGroup: typeof import('vant/es')['CellGroup']

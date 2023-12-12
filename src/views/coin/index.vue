@@ -91,7 +91,7 @@ function onClickModel() {
 </script>
 
 <template>
-  <VanNavBar title="💿 金钱卦" left-arrow fixed @click-left="onClickLeft" />
+  <VanNavBar title="📀 金钱卦" left-arrow fixed @click-left="onClickLeft" />
   <div class="container">
     <div class="result">
       <div v-if="showType === ShowType.RENDER" class="data-content">

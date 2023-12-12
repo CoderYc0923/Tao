@@ -20,14 +20,14 @@ watch(checked, (val) => {
 
 <template>
   <div class="container">
-    <VanCellGroup title="移动端模板" inset>
+    <VanCellGroup title="意以象尽，象以言著" inset>
       <VanCell center title="🌗 暗黑模式">
         <template #right-icon>
           <VanSwitch v-model="checked" size="23px" />
         </template>
       </VanCell>
 
-      <VanCell title="💿 金钱卦" to="coin" is-link />
+      <VanCell title="📀 金钱卦" to="coin" is-link />
 
       <!-- <VanCell title="📊 Echarts 演示" to="charts" is-link /> -->
     </VanCellGroup>
