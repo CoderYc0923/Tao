@@ -13,6 +13,7 @@ const showType = ref<ShowType>(ShowType.DIVINATION)
 const allCoins = ref<Coin[][]>([])
 const throwCount = ref<number>(0)
 const show = ref<boolean>(false)
+const bubbleOffset = ref({ x: 24, y: 400 })
 const copyTextsSuffix = ' ———— 解卦自《道之微》'
 
 watch(
@@ -180,7 +181,7 @@ function onClickModel() {
         重置
       </VanButton>
     </div>
-    <van-floating-bubble icon="question-o" axis="xy" magnetic="x" @click="onClick" />
+    <van-floating-bubble icon="question-o" axis="xy" magnetic="x" v-model:offset="bubbleOffset" @click="onClick" />
     <van-overlay :show="show" @click="onClickModel">
       <div class="wrapper">
         <div class="tips-model">
@@ -274,7 +275,8 @@ function onClickModel() {
       flex-direction: column;
       width: 80%;
       min-height: 10%;
-      max-height: 30%;
+      max-height: 40%;
+      overflow-y: auto;
       border-radius: 10px;
       background-color: #fff;
       padding: 10px;
