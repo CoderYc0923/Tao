@@ -60,6 +60,17 @@ export interface Coin {
   comp: any
 }
 
+export interface Options {
+  label: string
+  value: string
+}
+
+export interface GuaAnalyze {
+  grade: string // 卦的好坏等级
+  doubleName: string // 卦名
+  meaning: Options[] // 卦的含义解析
+}
+
 export enum ShowType {
   DIVINATION,
   INTERPRET,

@@ -181,7 +181,7 @@ function onClickModel() {
         重置
       </VanButton>
     </div>
-    <van-floating-bubble icon="question-o" axis="xy" magnetic="x" v-model:offset="bubbleOffset" @click="onClick" />
+    <van-floating-bubble v-model:offset="bubbleOffset" icon="question-o" axis="xy" magnetic="x" @click="onClick" />
     <van-overlay :show="show" @click="onClickModel">
       <div class="wrapper">
         <div class="tips-model">

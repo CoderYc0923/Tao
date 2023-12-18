@@ -1,5 +1,6 @@
 import type { SentenceYao } from '@/typing'
 
+// 爻相关信息
 const yaoSentenceData: SentenceYao[] = [
   {
     guaName: '乾',

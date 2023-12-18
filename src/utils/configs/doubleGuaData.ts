@@ -1,5 +1,6 @@
 import type { DoubleGua } from '@/typing'
 
+// 卦相关信息
 const doubleGuaData: DoubleGua[] = [
   {
     doubleCode: 999999,
