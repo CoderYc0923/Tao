@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { showToast } from 'vant'
 import type { UserInfo } from '@/typing'
 import { solar2lunar } from '@/utils/configs/dateTransform'
 import natalChart from '@/components/natalChart/index.vue'
+import copyHandle from '@/utils/hooks/useCopy';
 
+const router = useRouter()
 const resultData = ref<any>()
-
 const userInfo = ref<UserInfo>({
   name: '',
   birthdayYMD: [],
@@ -29,7 +31,7 @@ const selectedTime = ref(['12', '00'])
 function onSubmit() {
   const { name, birthdayYMD } = userInfo.value
   // 阳历转农历
-  const { lYear, lMonth, lDay } = solar2lunar(birthdayYMD[0], birthdayYMD[1], birthdayYMD[2])
+  const { lYear, lMonth, lDay } = solar2lunar(Number(birthdayYMD[0]), Number(birthdayYMD[1]), Number(birthdayYMD[2]))
 
   const result = {
     name: name || '无名氏',
@@ -37,6 +39,12 @@ function onSubmit() {
     t: hmsValue.value,
   }
   resultData.value = result
+}
+
+function onShare() {
+  const shareUrl = `http://localhost:3000/chart?name=${userInfo.value.name}&ymdValue=${ymdValue.value}&hmsValue=${hmsValue.value}`
+  copyHandle(shareUrl)
+  showToast('复制链接成功')
 }
 
 function handleDateConfirm(value: any) {
@@ -50,7 +58,22 @@ function handleTimeConfirm(value: any) {
 }
 
 // back
-const onClickLeft = () => history.back()
+const onClickLeft = () => router.push({name: 'main'})
+
+const autoInit = (query: any) => {
+  userInfo.value.name = query?.name || ''
+  userInfo.value.birthdayHMS = query.hmsValue.split(':')
+  userInfo.value.birthdayYMD = query.ymdValue.split('-')
+  onSubmit()
+}
+
+onMounted(() => {
+  console.log(router.currentRoute.value);
+  const routerQuery = router.currentRoute.value.query
+  if (routerQuery?.ymdValue && routerQuery?.hmsValue) {
+    autoInit(routerQuery)
+  }
+})
 </script>
 
 <template>
@@ -65,13 +88,16 @@ const onClickLeft = () => history.back()
           :rules="[{ required: true, message: '请填写出生年月日' }]" @click="showPicker = true"
         />
         <van-field
-          v-model="hmsValue" readonly name="出生时分秒选择" label="出生时分秒" placeholder="点击选择出生时分秒"
-          :rules="[{ required: true, message: '请填写出生时分秒' }]" @click="showTimer = true"
+          v-model="hmsValue" readonly name="出生时分选择" label="出生时分" placeholder="点击选择出生时分"
+          :rules="[{ required: true, message: '请填写出生时分' }]" @click="showTimer = true"
         />
       </van-cell-group>
-      <div style="margin: 16px;">
-        <van-button round block type="primary" native-type="submit">
+      <div style="margin: 16px;display: flex;justify-content: space-between;">
+        <van-button round block type="primary" native-type="submit" style="width: 48%;">
           排盘
+        </van-button>
+        <van-button round block plain style="width: 48%;background: transparent;border-color: #000000;" @click="onShare">
+          分享
         </van-button>
       </div>
     </van-form>
@@ -84,7 +110,7 @@ const onClickLeft = () => history.back()
     </van-popup>
     <van-popup v-model:show="showTimer" position="bottom">
       <van-time-picker
-        v-model="selectedTime" :columns-type="['hour', 'minute', 'second']" title="选择出生时分秒"
+        v-model="selectedTime" :columns-type="['hour', 'minute']" title="选择出生时分"
         @confirm="handleTimeConfirm" @cancel="showTimer = false"
       />
     </van-popup>
@@ -95,8 +121,9 @@ const onClickLeft = () => history.back()
 .container {
   width: 100%;
   height: 100%;
-  padding: 60px 16px;
+  padding: 16px;
   position: relative;
+  overflow-y: auto;
 }
 
 .chart {

@@ -6,7 +6,10 @@ import xiang from '@/components/xiang/xiang.vue'
 import { type Coin, type OutputInfo, ShowType } from '@/typing'
 import GuaMainControler from '@/utils/hooks/useDivination'
 import useRandomBinary from '@/utils/hooks/useRandom'
+import copyHandle from '@/utils/hooks/useCopy';
 
+
+const router = useRouter()
 const mainControler = new GuaMainControler()
 const result = ref<OutputInfo>()
 const showType = ref<ShowType>(ShowType.DIVINATION)
@@ -61,16 +64,6 @@ function getCopyText() {
   return copyText + copyTextsSuffix
 }
 
-function copyHandle(val: string) {
-  const inp = document.createElement('input')
-  inp.type = 'text'
-  inp.value = val
-  document.body.appendChild(inp)
-  inp.select()
-  document.execCommand('Copy', true)
-  document.body.removeChild(inp)
-}
-
 // reset data
 function reset() {
   showType.value = ShowType.DIVINATION
@@ -80,7 +73,7 @@ function reset() {
 }
 
 // back
-const onClickLeft = () => history.back()
+const onClickLeft = () => router.push({name: 'main'})
 
 function onClick() {
   show.value = true
