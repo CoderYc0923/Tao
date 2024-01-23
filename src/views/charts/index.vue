@@ -1,82 +1,93 @@
 <script setup lang="ts">
-import { Chart } from '@/components'
+import type { UserInfo } from '@/typing'
+import { solar2lunar } from '@/utils/configs/dateTransform'
+import natalChart from '@/components/natalChart/index.vue'
 
-const barOption = {
-  title: {},
-  tooltip: {},
-  xAxis: {
-    data: ['1月', '2月', '3月', '4月', '5月', '6月'],
-  },
-  yAxis: {},
-  series: [
-    {
-      name: 'sales',
-      type: 'bar',
-      data: [5, 20, 36, 10, 10, 20],
-    },
-  ],
+const resultData = ref<any>()
+
+const userInfo = ref<UserInfo>({
+  name: '',
+  birthdayYMD: [],
+  birthdayHMS: [],
+})
+
+const ymdValue = computed(() => {
+  return userInfo.value.birthdayYMD.join('-')
+})
+
+const hmsValue = computed(() => {
+  return userInfo.value.birthdayHMS.join(':')
+})
+
+const showPicker = ref<boolean>(false)
+const showTimer = ref<boolean>(false)
+const selectedDate = ref(['1999', '01', '01'])
+const minDate = new Date(1900, 1, 1)
+const maxDate = new Date()
+const selectedTime = ref(['12', '00'])
+
+function onSubmit() {
+  const { name, birthdayYMD } = userInfo.value
+  // 阳历转农历
+  const { lYear, lMonth, lDay } = solar2lunar(birthdayYMD[0], birthdayYMD[1], birthdayYMD[2])
+
+  const result = {
+    name: name || '无名氏',
+    d: `${lYear}-${lMonth}-${lDay}`,
+    t: hmsValue.value,
+  }
+  resultData.value = result
 }
 
-const lineOption = {
-  xAxis: {
-    type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-  },
-  yAxis: {
-    type: 'value',
-  },
-  series: [
-    {
-      data: [150, 230, 224, 218, 135, 147, 260],
-      type: 'line',
-    },
-  ],
+function handleDateConfirm(value: any) {
+  userInfo.value.birthdayYMD = value.selectedValues
+  showPicker.value = false
 }
 
-const scoreOption = {
-  tooltip: {
-    formatter: '{a} <br/>{b} : {c}%',
-  },
-  series: [
-    {
-      name: 'Pressure',
-      type: 'gauge',
-      detail: {
-        formatter: '{value}',
-      },
-      data: [
-        {
-          value: 50,
-          name: 'SCORE',
-        },
-      ],
-    },
-  ],
+function handleTimeConfirm(value: any) {
+  userInfo.value.birthdayHMS = value.selectedValues
+  showTimer.value = false
 }
-
-const refBarOption = ref(barOption)
-const refLineOption = ref(lineOption)
-const refScoreOption = ref(scoreOption)
 
 // back
 const onClickLeft = () => history.back()
 </script>
 
 <template>
-  <VanNavBar title="📊 Echarts" left-arrow fixed @click-left="onClickLeft" />
+  <VanNavBar title="⭐ 命盘" left-arrow fixed @click-left="onClickLeft" />
 
   <div class="container">
-    <div class="chart">
-      <Chart :option="refBarOption" :style="{ height: '330px' }" />
-    </div>
-
-    <div class="chart item">
-      <Chart :option="refLineOption" :style="{ height: '330px' }" />
-    </div>
-
-    <div class="chart item">
-      <Chart :option="refScoreOption" :style="{ height: '330px' }" />
-    </div>
+    <van-form @submit="onSubmit">
+      <van-cell-group title="个人信息" inset>
+        <van-field v-model="userInfo.name" name="姓名" label="姓名" placeholder="输入姓名" />
+        <van-field
+          v-model="ymdValue" readonly name="出生年月日选择" label="出生年月日" placeholder="点击选择出生年月日"
+          :rules="[{ required: true, message: '请填写出生年月日' }]" @click="showPicker = true"
+        />
+        <van-field
+          v-model="hmsValue" readonly name="出生时分秒选择" label="出生时分秒" placeholder="点击选择出生时分秒"
+          :rules="[{ required: true, message: '请填写出生时分秒' }]" @click="showTimer = true"
+        />
+      </van-cell-group>
+      <div style="margin: 16px;">
+        <van-button round block type="primary" native-type="submit">
+          排盘
+        </van-button>
+      </div>
+    </van-form>
+    <natal-chart v-if="resultData" :result="resultData" />
+    <van-popup v-model:show="showPicker" position="bottom">
+      <van-date-picker
+        v-model="selectedDate" title="选择出生年月日" :min-date="minDate" :max-date="maxDate"
+        @confirm="handleDateConfirm" @cancel="showPicker = false"
+      />
+    </van-popup>
+    <van-popup v-model:show="showTimer" position="bottom">
+      <van-time-picker
+        v-model="selectedTime" :columns-type="['hour', 'minute', 'second']" title="选择出生时分秒"
+        @confirm="handleTimeConfirm" @cancel="showTimer = false"
+      />
+    </van-popup>
   </div>
 </template>
 

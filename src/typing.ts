@@ -71,6 +71,12 @@ export interface GuaAnalyze {
   meaning: Options[] // 卦的含义解析
 }
 
+export interface UserInfo {
+  name: string
+  birthdayYMD: string[]
+  birthdayHMS: string[]
+}
+
 export enum ShowType {
   DIVINATION,
   INTERPRET,
