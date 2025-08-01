@@ -29,7 +29,7 @@ watch(checked, (val) => {
 
       <VanCell title="📀 卜一卦" to="coin" is-link />
 
-      <VanCell title="⭐ 命盘" to="chart" is-link />
+      <!-- <VanCell title="⭐ 命盘" to="chart" is-link /> -->
 
       <!-- <VanCell title="📊 Echarts 演示" to="charts" is-link /> -->
     </VanCellGroup>

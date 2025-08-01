@@ -6,8 +6,7 @@ import xiang from '@/components/xiang/xiang.vue'
 import { type Coin, type OutputInfo, ShowType } from '@/typing'
 import GuaMainControler from '@/utils/hooks/useDivination'
 import useRandomBinary from '@/utils/hooks/useRandom'
-import copyHandle from '@/utils/hooks/useCopy';
-
+import copyHandle from '@/utils/hooks/useCopy'
 
 const router = useRouter()
 const mainControler = new GuaMainControler()
@@ -73,7 +72,7 @@ function reset() {
 }
 
 // back
-const onClickLeft = () => router.push({name: 'main'})
+const onClickLeft = () => router.push({ name: 'main' })
 
 function onClick() {
   show.value = true

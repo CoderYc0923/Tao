@@ -1,4 +1,4 @@
-import { dizhi, sihuaMap } from './map';
+import { dizhi, sihuaMap } from './map'
 
 export const lucunRule = {
   jia: 'yin',
@@ -10,7 +10,7 @@ export const lucunRule = {
   geng: 'shen',
   xin: 'you',
   ren: 'hai',
-  gui: 'zi'
+  gui: 'zi',
 }
 
 export const tianma = {
@@ -25,7 +25,7 @@ export const tianma = {
   wei: 'si',
   si: 'hai',
   you: 'hai',
-  chou: 'hai'
+  chou: 'hai',
 }
 
 export const huoxing = {
@@ -40,7 +40,7 @@ export const huoxing = {
   chou: 'mao',
   hai: 'you',
   mao: 'you',
-  wei: 'you'
+  wei: 'you',
 }
 
 export const lingxing = {
@@ -55,7 +55,7 @@ export const lingxing = {
   chou: 'xu',
   hai: 'xu',
   mao: 'xu',
-  wei: 'xu'
+  wei: 'xu',
 }
 export const xianchi = {
   yin: 'mao',
@@ -69,42 +69,47 @@ export const xianchi = {
   chou: 'wu',
   hai: 'zi',
   mao: 'zi',
-  wei: 'zi'
+  wei: 'zi',
 }
 
 // t == true ? 天魁 ： 天钺
-export function getTiankuiTianyue(t?:boolean) {
+export function getTiankuiTianyue(t?: boolean) {
   const r1 = t ? 'chou' : 'wei'
   const r2 = t ? 'zi' : 'shen'
   const r3 = t ? 'hai' : 'you'
   const r4 = t ? 'yin' : 'wu'
   const r5 = t ? 'mao' : 'si'
   return {
-    jia: r1, wu: r1, geng: r1,
-    yi: r2, ji: r2,
-    bing: r3, ding: r3,
+    jia: r1,
+    wu: r1,
+    geng: r1,
+    yi: r2,
+    ji: r2,
+    bing: r3,
+    ding: r3,
     xin: r4,
-    ren: r5, gui: r5
+    ren: r5,
+    gui: r5,
   }
 }
 
 interface StarsConfig {
-  isSub?: number,
-  rule: string | [string, string, boolean, string],
-  star: any,
-  cb?:Function
+  isSub?: number
+  rule: string | [string, string, boolean, string]
+  star: any
+  cb?: Function
 }
 
-export function getSmallStarsConfig(person): StarsConfig[]{
+export function getSmallStarsConfig(person): StarsConfig[] {
   return [
     {
       isSub: 1,
       rule: lucunRule[person.personInfo.tYear],
       star: { name: '禄存', code: 'lucun' },
-      cb(palace){
+      cb(palace) {
         palace.next.addSmallStar({ name: '擎羊', code: 'qingyang' })
         palace.prev.addSmallStar({ name: '陀罗', code: 'tuoluo' })
-      }  
+      },
     },
     {
       rule: tianma[person.personInfo.dYear],
@@ -116,65 +121,65 @@ export function getSmallStarsConfig(person): StarsConfig[]{
     },
     {
       rule: ['hai', '子', false, person.personInfo.shichen],
-      star: { name: '地空', code: 'dikong' }
+      star: { name: '地空', code: 'dikong' },
     },
     {
       rule: ['hai', '子', true, person.personInfo.shichen],
-      star: { name: '地劫', code: 'dijie' }
+      star: { name: '地劫', code: 'dijie' },
     },
     {
       rule: [lingxing[person.personInfo.dYear], '子', true, person.personInfo.shichen],
-      star: { name: '铃星', code: 'lingxing' }
+      star: { name: '铃星', code: 'lingxing' },
     },
     {
       rule: ['mao', '子', false, person.personInfo.dYear],
-      star: { name: '红鸾', code: 'hongluan' }
+      star: { name: '红鸾', code: 'hongluan' },
     },
     {
       rule: ['you', '子', false, person.personInfo.dYear],
-      star: { name: '天喜', code: 'tianxi' }
+      star: { name: '天喜', code: 'tianxi' },
     },
     {
-      rule: ['chou', '子', true,  dizhi[person.personInfo.lMonth - 1]],
-      star: { name: '天姚', code: 'tianyao' }
+      rule: ['chou', '子', true, dizhi[person.personInfo.lMonth - 1]],
+      star: { name: '天姚', code: 'tianyao' },
     },
     {
       rule: xianchi[person.personInfo.dYear],
-      star: { name: '咸池', code: 'xianchi' }
+      star: { name: '咸池', code: 'xianchi' },
     },
     {
       rule: ['you', '子', true, dizhi[person.personInfo.lMonth - 1]],
-      star: { name: '天刑', code: 'tianxing' }
+      star: { name: '天刑', code: 'tianxing' },
     },
     {
       isSub: 1,
       rule: ['chen', '子', true, dizhi[person.personInfo.lMonth - 1]],
-      star: { name: '左辅', code: 'zuofu', sihua: sihuaMap[person.personInfo.tYear]['zuofu'] }
+      star: { name: '左辅', code: 'zuofu', sihua: sihuaMap[person.personInfo.tYear].zuofu },
     },
     {
       isSub: 1,
       rule: ['xu', '子', false, dizhi[person.personInfo.lMonth - 1]],
-      star: { name: '右弼', code: 'youbi', sihua: sihuaMap[person.personInfo.tYear]['youbi'] }
+      star: { name: '右弼', code: 'youbi', sihua: sihuaMap[person.personInfo.tYear].youbi },
     },
     {
       isSub: 1,
       rule: ['chen', '子', true, person.personInfo.shichen],
-      star: { name: '文曲', code: 'wenqu', sihua: sihuaMap[person.personInfo.tYear]['wenqu'] }
+      star: { name: '文曲', code: 'wenqu', sihua: sihuaMap[person.personInfo.tYear].wenqu },
     },
     {
       isSub: 1,
       rule: ['xu', '子', false, person.personInfo.shichen],
-      star: { name: '文昌', code: 'wenchang', sihua: sihuaMap[person.personInfo.tYear]['wenchang'] }
+      star: { name: '文昌', code: 'wenchang', sihua: sihuaMap[person.personInfo.tYear].wenchang },
     },
     {
       isSub: 1,
       rule: getTiankuiTianyue(true)[person.personInfo.tYear],
-      star: { name: '天魁', code: 'tiankui' }
+      star: { name: '天魁', code: 'tiankui' },
     },
     {
       isSub: 1,
       rule: getTiankuiTianyue()[person.personInfo.tYear],
-      star: { name: '天钺', code: 'tianyue' }
-    }
+      star: { name: '天钺', code: 'tianyue' },
+    },
   ]
-} 
+}

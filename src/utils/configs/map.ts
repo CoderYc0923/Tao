@@ -6,7 +6,7 @@ export const wuxingGame = [
   { name: '水二局', num: 2 },
   { name: '火六局', num: 6 },
   { name: '土五局', num: 5 },
-  { name: '木三局', num: 3 }
+  { name: '木三局', num: 3 },
 ]
 
 /**
@@ -23,7 +23,7 @@ export const palaceNames = [
   { name: '财帛', code: 'caibo' },
   { name: '子女', code: 'zinv' },
   { name: '夫妻', code: 'fuqi' },
-  { name: '兄弟', code: 'xiongdi' }
+  { name: '兄弟', code: 'xiongdi' },
 ]
 /**
  * 天干信息表
@@ -120,31 +120,31 @@ export const sihuaMap = {
     lianzhen: '禄',
     pojun: '权',
     wuqu: '科',
-    taiyang: '忌'
+    taiyang: '忌',
   },
   yi: {
     tianji: '禄',
     tianliang: '权',
     ziwei: '科',
-    taiyin: '忌'
+    taiyin: '忌',
   },
   bing: {
     tiantong: '禄',
     tianji: '权',
     wenchang: '科',
-    lianzhen: '忌'
+    lianzhen: '忌',
   },
   ding: {
     taiyin: '禄',
     tiantong: '权',
     tianji: '科',
-    jumen: '忌'
+    jumen: '忌',
   },
   wu: {
     tanlang: '禄',
     taiyin: '权',
     youbi: '科',
-    tianji: '忌'
+    tianji: '忌',
   },
   ji: {
     wuqu: '禄',
@@ -156,7 +156,7 @@ export const sihuaMap = {
     taiyang: '禄',
     wuqu: '权',
     taiyin: '科',
-    tiantong: '忌'
+    tiantong: '忌',
   },
   xin: {
     jumen: '禄',
@@ -168,14 +168,14 @@ export const sihuaMap = {
     tianliang: '禄',
     ziwei: '权',
     zuofu: '科',
-    wuqu: '忌'
+    wuqu: '忌',
   },
   gui: {
     pojun: '禄',
     jumen: '权',
     taiyin: '科',
-    tanlang: '忌'
-  }
+    tanlang: '忌',
+  },
 }
 
 /**
@@ -186,15 +186,15 @@ export const sihuaMap = {
 export function getMainStarsWithZiwei(person: any) {
   const t = person.personInfo.tYear
   return [
-    { name: '紫薇', code: 'ziwei', sihua: sihuaMap[t]['ziwei'] },
-    { name: '天机', code: 'tianji', sihua: sihuaMap[t]['tianji'] },
+    { name: '紫薇', code: 'ziwei', sihua: sihuaMap[t].ziwei },
+    { name: '天机', code: 'tianji', sihua: sihuaMap[t].tianji },
     null,
-    { name: '太阳', code: 'taiyang', sihua: sihuaMap[t]['taiyang'] },
-    { name: '武曲', code: 'wuqu', sihua: sihuaMap[t]['wuqu'] },
-    { name: '天同', code: 'tiantong', sihua: sihuaMap[t]['tiantong'] },
+    { name: '太阳', code: 'taiyang', sihua: sihuaMap[t].taiyang },
+    { name: '武曲', code: 'wuqu', sihua: sihuaMap[t].wuqu },
+    { name: '天同', code: 'tiantong', sihua: sihuaMap[t].tiantong },
     null,
     null,
-    { name: '廉贞', code: 'lianzhen', sihua: sihuaMap[t]['lianzhen'] }
+    { name: '廉贞', code: 'lianzhen', sihua: sihuaMap[t].lianzhen },
   ]
 }
 
@@ -202,17 +202,19 @@ export function getMainStarsWithZiwei(person: any) {
  * 根据天府星获取主星信息
  * eq: 确定天府 =》 顺时针： 天府 =》 太阴 =》 贪狼 =》 巨门 =》 天相 =》 天梁 =》 七杀 => 空三格 =》 破军
  */
-export function getMainStarsWithTianfu(person){
+export function getMainStarsWithTianfu(person) {
   const t = person.personInfo.tYear
   return [
-    { name: '天府', code: 'tianfu', sihua: sihuaMap[t]['tianfu'] },
-    { name: '太阴', code: 'taiyin', sihua: sihuaMap[t]['taiyin'] },
-    { name: '贪狼', code: 'tanlang', sihua: sihuaMap[t]['tanlang'] },
-    { name: '巨门', code: 'jumen', sihua: sihuaMap[t]['jumen'] },
-    { name: '天相', code: 'tianxaing', sihua: sihuaMap[t]['tianxaing'] },
-    { name: '天梁', code: 'tianliang', sihua: sihuaMap[t]['tianliang'] },
-    { name: '七杀', code: 'qisha', sihua: sihuaMap[t]['qisha'] },
-    null, null, null,
-    { name: '破军', code: 'pojun', sihua: sihuaMap[t]['pojun'] },
+    { name: '天府', code: 'tianfu', sihua: sihuaMap[t].tianfu },
+    { name: '太阴', code: 'taiyin', sihua: sihuaMap[t].taiyin },
+    { name: '贪狼', code: 'tanlang', sihua: sihuaMap[t].tanlang },
+    { name: '巨门', code: 'jumen', sihua: sihuaMap[t].jumen },
+    { name: '天相', code: 'tianxaing', sihua: sihuaMap[t].tianxaing },
+    { name: '天梁', code: 'tianliang', sihua: sihuaMap[t].tianliang },
+    { name: '七杀', code: 'qisha', sihua: sihuaMap[t].qisha },
+    null,
+    null,
+    null,
+    { name: '破军', code: 'pojun', sihua: sihuaMap[t].pojun },
   ]
-} 
+}

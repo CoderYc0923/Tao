@@ -6,7 +6,6 @@ import 'nprogress/nprogress.css'
 // 导入路由组件
 import main from '@/views/index.vue'
 import coin from '@/views/coin/index.vue'
-import chart from '@/views/charts/index.vue'
 
 NProgress.configure({ showSpinner: true, parent: '#app' })
 
@@ -22,11 +21,11 @@ const routes = [
     name: 'coin',
     component: coin,
   },
-  {
+  /* {
     path: '/chart',
     name: 'chart',
     component: chart,
-  },
+  }, */
 ]
 
 // 创建路由实例并传递 `routes` 配置

@@ -7,26 +7,17 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    CenterCell: typeof import('./src/components/natalChart/centerCell.vue')['default']
-    CenterInfoBox: typeof import('./src/components/natalChart/centerInfoBox.vue')['default']
     Chart: typeof import('./src/components/chart/index.vue')['default']
     CoinYang: typeof import('./src/components/coin/coinYang.vue')['default']
     CoinYin: typeof import('./src/components/coin/coinYin.vue')['default']
-    NatalChart: typeof import('./src/components/natalChart/index.vue')['default']
-    PalaceCell: typeof import('./src/components/natalChart/palaceCell.vue')['default']
     VanButton: typeof import('vant/es')['Button']
     VanCell: typeof import('vant/es')['Cell']
     VanCellGroup: typeof import('vant/es')['CellGroup']
     VanConfigProvider: typeof import('vant/es')['ConfigProvider']
-    VanDatePicker: typeof import('vant/es')['DatePicker']
-    VanField: typeof import('vant/es')['Field']
     VanFloatingBubble: typeof import('vant/es')['FloatingBubble']
-    VanForm: typeof import('vant/es')['Form']
     VanNavBar: typeof import('vant/es')['NavBar']
     VanOverlay: typeof import('vant/es')['Overlay']
-    VanPopup: typeof import('vant/es')['Popup']
     VanSwitch: typeof import('vant/es')['Switch']
-    VanTimePicker: typeof import('vant/es')['TimePicker']
     Xiang: typeof import('./src/components/xiang/xiang.vue')['default']
   }
 }
