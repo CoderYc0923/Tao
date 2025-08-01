@@ -32,7 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      # 如果你的项目需要构建步骤（比如npm run build），需要添加下面的步骤
+      # 如果你的项目需要构建步骤（比如npm run build），需要添加下面的步骤 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
